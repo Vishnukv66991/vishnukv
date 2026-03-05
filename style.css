@@ -1,0 +1,791 @@
+/* 
+  Global Variables and Theming
+  "Organic Light" Theme based on the user's mockup.
+  Features crisp white backgrounds, vibrant mustard yellow and soft organic shapes.
+*/
+:root {
+    /* Colors */
+    --bg-color: #ffffff;
+    --bg-secondary: #fdfdfd;
+    --text-main: #111827;
+    /* Very dark charcoal for readability */
+    --text-muted: #6b7280;
+    /* Soft grey */
+
+    /* Accents */
+    --accent-yellow: #fbbf24;
+    /* Vibrant mustard yellow */
+    --accent-black: #1f2937;
+    /* Almost black for contrast shapes */
+
+    /* Structural Variables */
+    --border-radius-sm: 8px;
+    --border-radius-lg: 24px;
+
+    /* Soft, elegant shadows */
+    --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+    /* Typography */
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+
+    /* Spacing */
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --section-padding: 120px 10%;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 
+  Organic Background Shapes 
+  We will use absolute positioning to place these behind the content sections.
+*/
+.shape {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.shape-blob-1 {
+    top: -5%;
+    right: -5%;
+    width: 50vw;
+    height: 50vw;
+    background-color: var(--accent-yellow);
+    border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+    animation: morph 15s ease-in-out infinite alternate;
+}
+
+.shape-blob-2 {
+    top: 15%;
+    left: -10%;
+    width: 30vw;
+    height: 40vw;
+    background-color: var(--accent-black);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    opacity: 0.9;
+    background-image: radial-gradient(var(--text-muted) 1px, transparent 1px);
+    background-size: 15px 15px;
+    /* Adds a bit of texture to the dark blob */
+}
+
+.shape-blob-3 {
+    bottom: -5%;
+    right: 10%;
+    width: 40vw;
+    height: 40vw;
+    background-color: #f3f4f6;
+    /* Very light grey blob */
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+}
+
+@keyframes morph {
+    0% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+    }
+
+    50% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    100% {
+        border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+    }
+}
+
+/* Typography Utilities */
+h1,
+h2,
+h3,
+h4,
+.logo {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+.highlight-text {
+    color: var(--accent-yellow);
+}
+
+.section {
+    padding: var(--section-padding);
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -20px;
+    width: 110%;
+    height: 15px;
+    background-color: rgba(251, 191, 36, 0.3);
+    /* Transparent yellow */
+    z-index: -1;
+    transform: rotate(-1deg);
+}
+
+/* Buttons (Elegant & Rounded) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    font-size: 1rem;
+}
+
+.btn.primary {
+    background-color: var(--accent-yellow);
+    color: var(--text-main);
+    box-shadow: var(--shadow-md);
+}
+
+.btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn.secondary {
+    background-color: var(--accent-black);
+    color: #fff;
+    box-shadow: var(--shadow-md);
+}
+
+.btn.secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    background-color: #000;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Navigation - Clean & Minimal */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: var(--transition);
+    background: transparent;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 10%;
+    box-shadow: var(--shadow-sm);
+}
+
+.logo {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Small organic circle next to logo */
+.logo::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: var(--accent-yellow);
+    border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+    border: 2px solid var(--text-main);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--text-main);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+/* Hero Section - Split Layout fitting the organic blobs */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    position: relative;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+    /* Keep above blobs */
+}
+
+.hero-greeting {
+    font-family: var(--font-heading);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 90%;
+}
+
+/* Floating Badges under Hero Content */
+.floating-badges {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.badge:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.badge i {
+    color: var(--accent-yellow);
+    font-size: 1.2rem;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.hero-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    left: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+}
+
+.hero-socials a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-socials a:hover {
+    background: var(--accent-yellow);
+    transform: translateY(-3px);
+}
+
+/* Right side Image / Graphic Area */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+}
+
+.image-placeholder {
+    width: 400px;
+    height: 500px;
+    background-color: var(--accent-yellow);
+    border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-placeholder i {
+    font-size: 8rem;
+    color: var(--text-main);
+    opacity: 0.5;
+}
+
+/* About / Skills Split Section */
+.split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.about-intro h2 {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 2rem;
+}
+
+.about-intro p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Skill Cards in Grid */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    position: relative;
+}
+
+/* Floating animation for cards */
+.floating-card {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.floating-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.floating-card i {
+    font-size: 3.5rem;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.floating-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Offset cards to look organic */
+.floating-card:nth-child(even) {
+    transform: translateY(40px);
+}
+
+.floating-card:nth-child(even):hover {
+    transform: translateY(30px);
+}
+
+/* Projects Section (Clean Cards) */
+.projects-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+}
+
+.project-card {
+    background: #ffffff;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.project-img {
+    width: 100%;
+    height: 240px;
+    background-color: var(--accent-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.project-card:nth-child(2) .project-img {
+    background-color: var(--accent-black);
+    color: #fff;
+}
+
+.project-card:nth-child(3) .project-img {
+    background-color: #f3f4f6;
+    color: var(--text-main);
+}
+
+.project-info {
+    padding: 2.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-info p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    flex: 1;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.project-link:hover {
+    color: var(--accent-yellow);
+}
+
+/* Contact Section (White clean aesthetic matching FormSubmit) */
+.contact-wrapper {
+    background: #ffffff;
+    border-radius: var(--border-radius-lg);
+    padding: 4rem;
+    box-shadow: var(--shadow-md);
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-header p {
+    color: var(--text-muted);
+}
+
+/* User's Exact Form Layout Styling Integration */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.col {
+    flex: 1;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1.2rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: var(--border-radius-sm);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    transition: var(--transition);
+    outline: none;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--accent-yellow);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1);
+}
+
+.btn-dark {
+    background-color: var(--text-main);
+    color: #fff;
+}
+
+.btn-dark:hover {
+    background-color: var(--accent-yellow);
+    color: var(--text-main);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-lg {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-info-bar {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+}
+
+.info-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.info-badge i {
+    width: 40px;
+    height: 40px;
+    background: #f3f4f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem;
+    background: #ffffff;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Animations Trigger Classes */
+.hide-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.show-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-socials {
+        position: static;
+        flex-direction: row;
+        transform: none;
+        margin-top: 2rem;
+    }
+
+    .image-placeholder {
+        width: 300px;
+        height: 300px;
+    }
+
+    .split-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .contact-wrapper {
+        padding: 3rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding: 80px 5%;
+    }
+
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .menu-toggle {
+        display: block;
+        z-index: 101;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transition);
+        z-index: 100;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        max-width: 100%;
+    }
+
+    .floating-badges {
+        justify-content: center;
+    }
+
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+
+    .floating-card:nth-child(even) {
+        transform: none;
+    }
+
+    .floating-card:nth-child(even):hover {
+        transform: translateY(-10px);
+    }
+
+    /* Fix User's Side-by-side form in mobile */
+    .form-group[style] {
+        flex-direction: column !important;
+    }
+}
