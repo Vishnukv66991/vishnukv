@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #facc15;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #0f172a;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Yellow Gradient Text */
+.text-gradient {
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.12);
+}
+
+/* Section Styles */
+.section {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 6rem 10%;
+  }
+}
+
+/* Section Header */
+.section-title {
+  font-size: 2.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#facc15, #eab308);
+  border-radius: 4px;
+}
